@@ -46,7 +46,7 @@ void LiquidCrystal_I2C::begin() {
 
 	// SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
 	// according to datasheet, we need at least 40ms after power rises above 2.7V
-	// before sending commands. Arduino can turn on way befer 4.5V so we'll wait 50
+	// before sending commands. Arduino can turn on way before 4.5V so we'll wait 50
 	delay(50);
 
 	// Now we pull both RS and R/W low to begin commands
@@ -93,7 +93,7 @@ void LiquidCrystal_I2C::begin() {
 
 /********** high level commands, for the user! */
 void LiquidCrystal_I2C::clear(){
-	command(LCD_CLEARDISPLAY);// clear display, set cursor position to zero
+	command(LCD_CLEARDISPLAY);  // clear display, set cursor position to zero
 	delayMicroseconds(2000);  // this command takes a long time!
 }
 
@@ -105,7 +105,7 @@ void LiquidCrystal_I2C::home(){
 void LiquidCrystal_I2C::setCursor(uint8_t col, uint8_t row){
 	int row_offsets[] = { 0x00, 0x40, 0x14, 0x54 };
 	if (row > _rows) {
-		row = _rows-1;    // we count rows starting w/0
+		row = _rows-1;  // we count rows starting w/0
 	}
 	command(LCD_SETDDRAMADDR | (col + row_offsets[row]));
 }
@@ -251,7 +251,7 @@ void LiquidCrystal_I2C::setBacklight(uint8_t new_val){
 }
 
 void LiquidCrystal_I2C::printstr(const char c[]){
-	//This function is not identical to the function used for "real" I2C displays
-	//it's here so the user sketch doesn't have to be changed
+	// This function is not identical to the function used for "real" I2C displays
+	// it's here so the user sketch doesn't have to be changed
 	print(c);
 }
